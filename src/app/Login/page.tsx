@@ -2,7 +2,7 @@ import React from 'react';
 
 const TALandingPage = () => {
     return (
-        <div className="text-default-black dark:text-default-white">
+        <div className="text-default-text-black dark:text-default-text-white">
             Loggin' in is cool!
         </div>
     )

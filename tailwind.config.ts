@@ -16,7 +16,7 @@ const config: Config = {
       },
       colors: {
         "nav-dark": "#1E1E1E",
-        "nav-light": "#F5F5F5",
+        "nav-light": "#F7F7F7",
         "page-dark": "#121212",
         "page-light": "#FFFFFF",
         "default-text-black": "#1A1A1A",
