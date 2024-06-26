@@ -6,6 +6,7 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       backgroundImage: {
@@ -14,11 +15,20 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
-        nav: "#18222f",
-        page: "#2b3441",
-        "default-text": "#f1f3f5",
-        "blue-accent": "#0084d4",
-        "blue-accent-hover": "#009fff",
+        "nav-dark": "#1E1E1E",
+        "nav-light": "#F5F5F5",
+        "page-dark": "#121212",
+        "page-light": "#FFFFFF",
+        "default-text-black": "#1A1A1A",
+        "default-text-white": "#F0F0F0",
+        "purple-accent": "#8A4FFF",
+        "purple-accent-hover": "#6A2FF0",
+        "dark-purple-accent": "#A875FF",
+        "dark-purple-secondary": "#9B4DFF",
+        "light-purple": "#E6D8FF",
+        "error-red": "#FF4D4D",
+        "success-green": " #4CAF50",
+
       },
     },
   },

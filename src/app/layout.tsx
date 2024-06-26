@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { ThemeProvider } from "./(contexts)/ThemeProvider";
 import NavBar from "./(components)/NavBar";
 import "./globals.css";
 
@@ -17,14 +18,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-    <body className={inter.className}>
-      <div className="flex flex-col h-screen max-h-screen">
-        <NavBar />
-        <div className="flex-grow overflow-y-auto bg-page text-default-text">
-          {children}
+    <ThemeProvider >
+      <body className={inter.className}>
+        <div className="flex flex-col h-screen max-h-screen">
+          <NavBar />
+          <div className="flex-grow overflow-y-auto bg-page-light dark:bg-page-dark text-default-text-black dark:text-default-text-white">
+            {children}
+          </div>
         </div>
-      </div>
-    </body>
+      </body>
+    </ThemeProvider>
   </html>
   );
 }
