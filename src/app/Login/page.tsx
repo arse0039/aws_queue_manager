@@ -1,9 +1,9 @@
-import React from 'react';
+import AuthClient from "@/(components)/AuthClient";
 
 const TALandingPage = () => {
     return (
-        <div className="text-default-text-black dark:text-default-text-white">
-            Loggin' in is cool!
+        <div className="text-default-text-black dark:text-default-text-white p-7">
+            <AuthClient/>
         </div>
     )
 }

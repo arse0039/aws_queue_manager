@@ -1,7 +1,8 @@
 import Link from "next/link";
 import DarkModeToggle from "./DarkModeToggle";
 
-const NavBar = () => {
+const NavBar = ( {userLoggedIn}:{userLoggedIn:boolean}) => {
+
   return (
     <nav className="flex justify-between bg-nav-light dark:bg-nav-dark p-4">
       <div className="flex items-center space-x-4 text-default-text-black dark:text-default-text-white">
@@ -10,7 +11,7 @@ const NavBar = () => {
       <div className="flex justify-evenly">
         <DarkModeToggle/>
         <Link href="/Login/" className="btn" >
-          Login
+          TA Login
         </Link>
       </div>
     </nav>
