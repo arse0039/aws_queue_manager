@@ -7,7 +7,7 @@ type ColorConfig = {
 
 const colors: ColorConfig = (config.theme?.extend?.colors as ColorConfig) ?? {};
 
-// Helper function to safely get color values
+// Helper function to get color values from the config file
 const getColor = (colorName: string): string => colors[colorName] ?? '#000000';
 
 export const lightTheme:Theme = {

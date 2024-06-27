@@ -18,6 +18,6 @@
 
 @layer components {
   .btn {
-    @apply hover:no-underline bg-purple-accent hover:bg-purple-accent-hover tracking-wider w-full text-center text-default-text-black dark:text-nav-light font-bold cursor-pointer uppercase px-4 py-2 rounded-md transition-colors block;
+    @apply hover:no-underline bg-purple-accent hover:bg-purple-accent-hover tracking-wider w-full text-center text-default-text-white font-bold cursor-pointer uppercase px-4 py-2 rounded-md transition-colors block;
   }
 }

@@ -4,6 +4,7 @@ import { ThemeProvider } from "../(contexts)/ThemeProvider";
 import NavBar from "../(components)/NavBar";
 import AuthProvider from "@/(components)/AuthProvider";
 import "./globals.css";
+import { isAuthenticated } from "@/utils/amplifyServerUtils";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,11 +13,12 @@ export const metadata: Metadata = {
   description: "An application for managing office hour queues for Oregon State University TAs",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
     <AuthProvider>
@@ -34,3 +36,5 @@ export default function RootLayout({
   </html>
   );
 }
+
+
