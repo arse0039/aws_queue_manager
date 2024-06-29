@@ -3,6 +3,7 @@ import config from  "@/../amplify_outputs.json";
 import {cookies} from 'next/headers';
 import { getCurrentUser } from 'aws-amplify/auth/server';
 
+// allows us to access AWS server-side.
 export const { runWithAmplifyServerContext } = createServerRunner({
     config
 });
