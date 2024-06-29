@@ -5,7 +5,8 @@ import {Authenticator} from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import outputs from '../../amplify_outputs.json';
 
-Amplify.configure(outputs);
+//ssr set to true ensures that data is stored as cookies instead of locally
+Amplify.configure(outputs, {ssr: true})
 
 
 const AuthProvider = ({ children }:{children: React.ReactNode}) => {

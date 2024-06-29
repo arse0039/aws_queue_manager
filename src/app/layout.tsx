@@ -4,6 +4,7 @@ import { ThemeProvider } from "../(contexts)/ThemeProvider";
 import NavBar from "../(components)/NavBar";
 import AuthProvider from "@/(components)/AuthProvider";
 import "./globals.css";
+import { isAuthenticated } from "@/utils/amplifyServerUtils";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,18 +13,21 @@ export const metadata: Metadata = {
   description: "An application for managing office hour queues for Oregon State University TAs",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const isLoggedIn = await isAuthenticated();
+
   return (
     <html lang="en">
     <AuthProvider>
       <ThemeProvider >
         <body className={inter.className}>
           <div className="flex flex-col h-screen max-h-screen">
-            <NavBar userLoggedIn={false}/>
+            <NavBar userLoggedIn={!!isLoggedIn}/>
             <div className="flex-grow overflow-y-auto bg-page-light dark:bg-page-dark text-default-text-black dark:text-default-text-white">
               {children}
             </div>
@@ -34,3 +38,5 @@ export default function RootLayout({
   </html>
   );
 }
+
+
