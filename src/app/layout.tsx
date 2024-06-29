@@ -19,13 +19,15 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
+  const isLoggedIn = await isAuthenticated();
+
   return (
     <html lang="en">
     <AuthProvider>
       <ThemeProvider >
         <body className={inter.className}>
           <div className="flex flex-col h-screen max-h-screen">
-            <NavBar userLoggedIn={false}/>
+            <NavBar userLoggedIn={!!isLoggedIn}/>
             <div className="flex-grow overflow-y-auto bg-page-light dark:bg-page-dark text-default-text-black dark:text-default-text-white">
               {children}
             </div>
