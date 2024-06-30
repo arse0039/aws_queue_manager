@@ -1,6 +1,7 @@
 import AuthClient from "@/(components)/AuthClient";
 
-const TALandingPage = () => {
+
+const LoginPage = async () => {
     return (
         <div className="p-7">
             <AuthClient/>
@@ -8,4 +9,4 @@ const TALandingPage = () => {
     )
 }
 
-export default TALandingPage;
+export default LoginPage;

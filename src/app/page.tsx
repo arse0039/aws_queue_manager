@@ -1,10 +1,18 @@
+import TALandingPage from "./TALanding/page";
+import { isAuthenticated } from "@/utils/amplifyServerUtils";
+import GenericLanding from '@/(components)/GenericLanding';
 
-export default function Home() {
+const Home = async () => {
+
+  const isLoggedIn = await isAuthenticated();
+
   return (
     <main className="flex flex-col items-center justify-between p-4">
       <div>
-        Main Page
+        {!!isLoggedIn ? <TALandingPage/> : <GenericLanding/>}
       </div>
     </main>
   );
 }
+
+export default Home;

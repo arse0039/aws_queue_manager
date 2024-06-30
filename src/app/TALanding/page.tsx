@@ -1,10 +1,13 @@
-import React from 'react';
+"use client"
+import React, {useState} from 'react';
+import GenerateSessionLink from '@/(components)/GenerateSessionLink';
 
-const TALandingPage = () => {
+const TALandingPage: React.FC = () => {    
+    const [sessionStarted, setSessionStarted] = useState<boolean>(false)
+
     return (
-        <div>
-            This is the main page TA's will see when they log in.
-        </div>
+
+        <GenerateSessionLink setSessionStarted={setSessionStarted}/>
     )
 }
 
