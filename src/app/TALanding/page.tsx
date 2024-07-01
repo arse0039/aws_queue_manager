@@ -2,6 +2,7 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import GenerateSessionLink from '@/(components)/GenerateSessionLink';
 import QueueCount from '@/(components)/QueueCount';
+import StudentQueueCard from '@/(components)/StudentQueueCard';
 
 const TALandingPage: React.FC = () => {    
     const [sessionStarted, setSessionStarted] = useState<boolean>(false);
@@ -61,12 +62,8 @@ const TALandingPage: React.FC = () => {
                     <div className="p-4">
                         Student Queue
                     </div>
-                    <div className="m-2 flex pb-2 justify-start border-b border-gray-300">
-                        <h1 className="mr-2">1.</h1><p> LastName, FirstName</p>
-                    </div>
-                    <div className="m-2 flex pb-2 justify-start border-b border-gray-300">
-                        <h1 className="mr-2">2.</h1><p> LastName, FirstName</p>
-                    </div>
+                    <StudentQueueCard lastName='Steele' firstName='Melissa' index={1} addedTime={new Date(Date.now() - 5000)} />
+                    
                 </div>
             </div>
         </div>
