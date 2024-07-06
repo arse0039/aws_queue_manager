@@ -4,9 +4,11 @@ import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 
-const GenerateSessionLink  = ({setSessionStarted}:{
-    setSessionStarted: React.Dispatch<React.SetStateAction<boolean>>
-}) => {
+const GenerateSessionLink  = ({setSessionStarted, userID} : 
+    {
+        setSessionStarted: React.Dispatch<React.SetStateAction<boolean>>,
+        userID: string
+    }) => {
     const [sessionLink, setSessionLink] = useState<string>("");
     const [linkCopied, setLinkCopied] = useState<boolean>(false);
 
@@ -33,7 +35,7 @@ const GenerateSessionLink  = ({setSessionStarted}:{
     const generateSessionLink = () => {
         const baseURL = typeof window !== 'undefined' ? window.location.origin : '';
         const sessionID = Math.floor(Math.random() * (10000000 - 10000 + 1)) + 10000;
-        setSessionLink(`${baseURL}/OHSession/${sessionID}`)
+        setSessionLink(`${baseURL}/OHSession/${userID}/${sessionID}`)
         setSessionStarted(true);
 
         document.cookie = `sessionID=${sessionID}; path=/; max-age=14400`;
