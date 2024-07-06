@@ -16,7 +16,7 @@ const TALandingPage: React.FC = () => {
                 <GenerateSessionLink setSessionStarted={setSessionStarted}/>
             </div>
             <QueueListDiv containerRef={containerRef}>
-                <div className="p-4">
+                <div className="flex p-4 items-center justify-center">
                     Student Queue
                 </div>
                 <StudentQueueCard lastName='Steele' firstName='Melissa' index={1} addedTime={new Date(Date.now() - 5000)} />
