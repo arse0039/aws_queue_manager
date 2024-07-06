@@ -10,7 +10,7 @@ interface StudentCardProps {
 
 const StudentQueueCard = ({firstName, lastName, index, addedTime}:StudentCardProps) => {
     const [elapsedTime, setElapsedTime] = useState<string>('00:00:00');
-    const [timerColor, setTimerColor] = useState<string>('text-green-300')
+    const [timerColor, setTimerColor] = useState<string>('text-green-500')
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -26,7 +26,7 @@ const StudentQueueCard = ({firstName, lastName, index, addedTime}:StudentCardPro
       } else if (minutes > 10) {
         setTimerColor('text-orange-400 font-bold');
       } else {
-        setTimerColor('text-green-300');
+        setTimerColor('text-green-500');
       }
 
       setElapsedTime(

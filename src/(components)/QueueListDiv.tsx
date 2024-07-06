@@ -8,7 +8,7 @@ interface QueueListDivProps {
 }
 
 const QueueListDiv = ({children, containerRef}:QueueListDivProps) => {    
-    const [rightPanelWidth, setRightPanelWidth] = useState<number>(250); 
+    const [rightPanelWidth, setRightPanelWidth] = useState<number>(300); 
 
 
     useEffect(() => {

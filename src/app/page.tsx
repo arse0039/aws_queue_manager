@@ -9,7 +9,7 @@ const Home = async () => {
   return (
     <main className="h-full">
       <div>
-        {!!isLoggedIn ? <TALandingPage/> : <GenericLanding/>}
+        {!!isLoggedIn ? <TALandingPage userID={isLoggedIn}/> : <GenericLanding/>}
       </div>
     </main>
   );
