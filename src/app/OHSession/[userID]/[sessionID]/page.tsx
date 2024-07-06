@@ -1,23 +1,40 @@
 "use client"
 import React, { FormEvent, useState } from 'react';
+import { validateOregonStateEmail } from '@/utils/utilityFunctions';
 
 interface StudentDataProps {
-    firstName: string,
-    lastName: string,
-    email: string,
-    description: string
+    sessionID: string;
+    userID: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    description: string;
+    dateAdded: Date;
 }
 
 const OHSession = ({params}:any) => {
     const [studentData, setStudentData] = useState<StudentDataProps>({
+        sessionID: params.sessionID as string,
+        userID: params.userID as string,
         firstName: "",
         lastName: "",
         email:"",
-        description: ""
+        description: "",
+        dateAdded: new Date(),
     });
+
+    const [validEmail, setValidEmail] = useState<string>("");
 
     const handleSubmit = (event:FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        if (!validateOregonStateEmail(studentData.email)) {
+            setValidEmail("Please enter a valid @oregonstate.edu address")
+            return;
+        }
+        setStudentData((prev) => ({
+            ...prev,
+            dateAdded: new Date(Date.now() - 5000)
+        }))
     }
 
     const handleChange = (
@@ -31,6 +48,9 @@ const OHSession = ({params}:any) => {
           ...prev,
           [name]: value,
         }));
+        if (name === 'email') {
+            setValidEmail("")
+        }
       };
 
     const name = "Brando"
@@ -47,16 +67,6 @@ const OHSession = ({params}:any) => {
                 method="post"
                 onSubmit={handleSubmit}
             >
-                <label>Last Name </label>
-                <input 
-                    id="lastName"
-                    name="lastName"
-                    type='text' 
-                    value={studentData.lastName}
-                    onChange={handleChange}
-                    className="text-black bg-gray-100 dark:bg-nav-light"
-                    required={true}
-                />
                 <label>First Name </label>
                 <input 
                     id="firstName"
@@ -67,7 +77,22 @@ const OHSession = ({params}:any) => {
                     className="text-black bg-gray-100 dark:bg-nav-light"
                     required={true}
                 />
+                <label>Last Name </label>
+                <input 
+                    id="lastName"
+                    name="lastName"
+                    type='text' 
+                    value={studentData.lastName}
+                    onChange={handleChange}
+                    className="text-black bg-gray-100 dark:bg-nav-light"
+                    required={true}
+                />
+                <div className="flex justify-between">
                 <label>School Email </label>
+                {validEmail && (
+                    <span className="text-error-red">{validEmail}</span>
+                )}
+                </div>
                 <input 
                     id="email"
                     name="email"
