@@ -7,7 +7,7 @@ const Home = async () => {
   const isLoggedIn = await isAuthenticated();
 
   return (
-    <main className="flex flex-col items-center justify-between p-4">
+    <main className="h-full">
       <div>
         {!!isLoggedIn ? <TALandingPage/> : <GenericLanding/>}
       </div>

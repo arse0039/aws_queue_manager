@@ -57,7 +57,7 @@ const GenerateSessionLink  = ({setSessionStarted}:{
             <div className="flex flex-row items-center bg-gray-100 dark:bg-gray-800 m-2 pr-1 pl-1 rounded-md ">
                 <p className="pr-1 pl-1 relative">{sessionLink} <span className="border-l border-gray-300 mx-2 h-4"></span>
                 {linkCopied && (
-                    <span className="absolute top-[-30px] right-0 bg-green-200 text-success-green p-1 rounded-md fade-out">
+                    <span className="absolute top-[-35px] right-0 bg-green-200 text-success-green p-1 rounded-md fade-out">
                     Link copied to clipboard!
                     </span>
               )}
