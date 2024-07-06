@@ -5,7 +5,7 @@ const GenericLanding = () => {
             <p>Welcome to the Queue Manager!</p>
             <p>After spending nearly two years working as a TA at Oregon State University, I often struggled with managing
                 the queue of students using just Microsoft Teams. Keeping up with the order and how long students had been in 
-                the queue was challenging during busy office hour times. This app exists to help TA`&rsquo;`s and instuctors more easily
+                the queue was challenging during busy office hour times. This app exists to help TA&apos;s and instuctors more easily
                 manage office hour queues.
             </p>
         </div>
