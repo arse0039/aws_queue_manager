@@ -19,7 +19,7 @@ const TALandingPage = ({userID} : {userID: string}) => {
                 <div className="flex p-4 items-center justify-center">
                     Student Queue
                 </div>
-                <StudentQueueCard lastName='Steele' firstName='Melissa' index={1} addedTime={new Date(Date.now() - 5000)} />
+                <StudentQueueCard lastName='Steele' firstName='Melissa' index={1} addedTime={new Date(Date.now())} />
             </QueueListDiv>
         </div>
     )

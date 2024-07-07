@@ -1,5 +1,6 @@
 "use client"
 import React, { FormEvent, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { validateOregonStateEmail } from '@/utils/utilityFunctions';
 
 interface StudentDataProps {
@@ -24,8 +25,9 @@ const OHSession = ({params}:any) => {
     });
 
     const [validEmail, setValidEmail] = useState<string>("");
+    const router = useRouter();
 
-    const handleSubmit = (event:FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event:FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (!validateOregonStateEmail(studentData.email)) {
             setValidEmail("Please enter a valid @oregonstate.edu address")
@@ -33,8 +35,22 @@ const OHSession = ({params}:any) => {
         }
         setStudentData((prev) => ({
             ...prev,
-            dateAdded: new Date(Date.now() - 5000)
+            dateAdded: new Date(Date.now())
         }))
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/queueManager/`, {
+            method: "POST",
+            body: JSON.stringify( studentData ),
+            headers: { 
+              "Content-Type": "application/json" ,
+            }
+          });
+      
+          if (!res.ok) {
+            throw new Error("Failed add student to the queue");
+          }
+
+          router.push("/success");
+      
     }
 
     const handleChange = (
