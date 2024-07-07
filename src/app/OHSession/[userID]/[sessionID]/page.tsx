@@ -2,19 +2,10 @@
 import React, { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { validateOregonStateEmail } from '@/utils/utilityFunctions';
-
-interface StudentDataProps {
-    sessionID: string;
-    userID: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    description: string;
-    dateAdded: Date;
-}
+import { StudentData } from '@/lib/definitions';
 
 const OHSession = ({params}:any) => {
-    const [studentData, setStudentData] = useState<StudentDataProps>({
+    const [studentData, setStudentData] = useState<StudentData>({
         sessionID: params.sessionID as string,
         userID: params.userID as string,
         firstName: "",
