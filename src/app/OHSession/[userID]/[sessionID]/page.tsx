@@ -49,7 +49,8 @@ const OHSession = ({params}:any) => {
             throw new Error("Failed add student to the queue");
           }
 
-          router.push("/success");
+        const result = await res.json();
+        router.push(`/Success?queuePosition=${result.queuePosition}`);
       
     }
 
