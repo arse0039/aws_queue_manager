@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { UserData } from '@/lib/definitions';
 
 
 const GenerateSessionLink  = ({setSessionStarted, userID} : 
@@ -11,6 +12,7 @@ const GenerateSessionLink  = ({setSessionStarted, userID} :
     }) => {
     const [sessionLink, setSessionLink] = useState<string>("");
     const [linkCopied, setLinkCopied] = useState<boolean>(false);
+    const [userData, setUserData] = useState<UserData>();
 
     useEffect(() => {
         // Check if a session already exists for the user in the browser.
@@ -32,13 +34,25 @@ const GenerateSessionLink  = ({setSessionStarted, userID} :
     // generate a random int value for the session. These sessions will only last for 4 hours
     // so the odds of overlap of ID values should be low. SessionID will be stored in the browser
     // to help persist session data. 
-    const generateSessionLink = () => {
+    const generateSessionLink = async () => {
         const baseURL = typeof window !== 'undefined' ? window.location.origin : '';
         const sessionID = Math.floor(Math.random() * (10000000 - 10000 + 1)) + 10000;
         setSessionLink(`${baseURL}/OHSession/${userID}/${sessionID}`)
         setSessionStarted(true);
+        setUserData({
+            userID: userID,
+            sessionID: sessionID
+        })
 
         document.cookie = `sessionID=${sessionID}; path=/; max-age=14400`;
+
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/users/`, {
+            method: "POST",
+            body: JSON.stringify({userID:userID, sessionID:sessionID}),
+            headers: { 
+              "Content-Type": "application/json" ,
+            }
+          });
     }
 
     // utility function to copy data to the clipboard and manage state used to display
