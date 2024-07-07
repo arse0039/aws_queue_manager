@@ -21,7 +21,7 @@ const GenerateSessionLink  = ({setSessionStarted, userID} :
           if (sessionCookie) {
             const sessionID = sessionCookie.split('=')[1];
             const baseURL = typeof window !== 'undefined' ? window.location.origin : '';
-            setSessionLink(`${baseURL}/OHSession/${sessionID}`);
+            setSessionLink(`${baseURL}/OHSession/${userID}/${sessionID}`);
             setSessionStarted(true);
           }
         };
