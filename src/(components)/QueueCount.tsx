@@ -1,8 +1,8 @@
 
-const QueueCount = () => {
+const QueueCount = ({count}:{count: number}) => {
     return (
         <div className="flex flex-col justify-start items-center">  
-            <h1 className="text-8xl">0</h1>
+            <h1 className="text-8xl">{count}</h1>
             <p>Students in the queue</p>
         </div>
     )

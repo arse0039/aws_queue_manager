@@ -10,6 +10,7 @@ import { StudentData, UserData } from '@/lib/definitions';
 const TALandingPage = ({userID} : {userID: string}) => {    
     const [sessionStarted, setSessionStarted] = useState<boolean>(false);
     const [sessionID, setSessionID] = useState<number | undefined>(undefined);
+    const [refereshQueue, setRefreshQueue] = useState<boolean>(false);
     const containerRef = useRef<HTMLDivElement>(null);
 
     const userSession = useDataFetching<UserData[]>(
@@ -33,22 +34,30 @@ const TALandingPage = ({userID} : {userID: string}) => {
             method: "GET",
             headers: { "Content-Type": "application/json" },
         },
-        [sessionID]
+        [sessionID, refereshQueue]
     );
 
-    console.log(queueData);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setRefreshQueue((prev) => !prev); 
+        }, 5000);
+        return () => clearInterval(interval);
+    },[]);
     
     return (
         <div ref={containerRef} className="flex h-screen w-full">
             <div className="flex-grow flex flex-col justify-start items-center">
-                {sessionStarted && <QueueCount/>}
+                {sessionStarted && <QueueCount count={queueData && queueData.length || 0}/>}
                 <GenerateSessionLink userID={userID} setSessionStarted={setSessionStarted}/>
             </div>
             <QueueListDiv containerRef={containerRef}>
                 <div className="flex p-4 items-center justify-center">
                     Student Queue
                 </div>
-                <StudentQueueCard lastName='Steele' firstName='Melissa' index={1} addedTime={new Date(Date.now())} />
+                {queueData?.map((student, idx) => (
+                    <StudentQueueCard key={idx} lastName={student.lastName} firstName={student.firstName} index={idx+1} addedTime={student.dateAdded} />
+                ))}
+                
             </QueueListDiv>
         </div>
     )
