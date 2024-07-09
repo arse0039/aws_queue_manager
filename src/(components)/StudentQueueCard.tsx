@@ -44,7 +44,10 @@ const StudentQueueCard = ({firstName, lastName, index, addedTime}:StudentCardPro
 
     return (
         <div className="m-2 flex pb-2 justify-start border-b border-gray-300">
-            <h1 className="mr-2">{index}.</h1><p> {lastName}, {firstName}</p><span className="mx-2"> - </span><span className={`${timerColor}`}>{elapsedTime}</span>
+            <h1 className="mr-2">{index}.</h1>
+            <p> {lastName}, {firstName}</p>
+            <span className="mx-2"> - </span>
+            <span className={`${timerColor}`}>{elapsedTime}</span>
         </div>
     )
 }
