@@ -12,10 +12,12 @@ const StudentQueueCard = ({firstName, lastName, index, addedTime}:StudentCardPro
     const [elapsedTime, setElapsedTime] = useState<string>('00:00:00');
     const [timerColor, setTimerColor] = useState<string>('text-green-500')
 
+
   useEffect(() => {
     const timer = setInterval(() => {
+      const addedDate = new Date(addedTime)
       const now = new Date();
-      const diff = now.getTime() - addedTime.getTime();
+      const diff = now.getTime() - addedDate.getTime();
       
       const hours = Math.floor(diff / 3600000);
       const minutes = Math.floor((diff % 3600000) / 60000);

@@ -12,16 +12,20 @@ export const useDataFetching = <T> (
 
     useEffect(() => {
         const fetchData = async () => {
+            if (url) {
             try {
-            const getData = await fetch(url, options);
-            const getDataJson: T = await getData.json();
-            setData(getDataJson);
+                const getData = await fetch(url, options);
+                const getDataJson: T = await getData.json();
+                setData(getDataJson);
             } catch (error) {
-            console.error("Error fetching data", error);
-            } 
+                console.error("Error fetching data", error);
+            }
+        } else {
+            console.log("No URL")
+        }
         };
         fetchData();
         }, [...dependencyArray]);
-    
+  
     return data;
 }
