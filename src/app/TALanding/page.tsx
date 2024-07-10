@@ -57,7 +57,7 @@ const TALandingPage = ({userID} : {userID: string}) => {
                     <DeleteButton queueData={queueData[0]} refresh={setRefreshQueue}/>
                 </div> 
                 }
-                <GenerateSessionLink userID={userID} setSessionStarted={setSessionStarted}/>
+                <GenerateSessionLink userID={userID} setSessionStarted={setSessionStarted} sessionID={sessionID}/>
             </div>
             <QueueListDiv containerRef={containerRef}>
                 <div className="flex p-4 items-center justify-center">
