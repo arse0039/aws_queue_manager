@@ -6,7 +6,7 @@ interface Options {
 }
 
 export const useDataFetching = <T> (
-    url:string, options:Options, dependencyArray:any[]
+    url:string, options:Options, dependencyArray:any[], setterFn?:React.Dispatch<React.SetStateAction<any>>
 ) => {
     const [data, setData] = useState<T | null>(null);
 
@@ -17,6 +17,7 @@ export const useDataFetching = <T> (
                 const getData = await fetch(url, options);
                 const getDataJson: T = await getData.json();
                 setData(getDataJson);
+                setterFn ? setterFn(getDataJson): null;
             } catch (error) {
                 console.error("Error fetching data", error);
             }

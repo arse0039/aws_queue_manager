@@ -6,14 +6,14 @@ import { UserData } from '@/lib/definitions';
 
 interface GenereateSessionLinkProps {
     setSessionStarted: React.Dispatch<React.SetStateAction<boolean>>;
+    setSessionID: React.Dispatch<React.SetStateAction<number | undefined>>;
     userID: string;
     sessionID: number | undefined;
 }
 
-const GenerateSessionLink  = ({setSessionStarted, userID, sessionID} : GenereateSessionLinkProps) => {
+const GenerateSessionLink  = ({setSessionStarted, setSessionID, userID, sessionID} : GenereateSessionLinkProps) => {
     const [sessionLink, setSessionLink] = useState<string>("");
     const [linkCopied, setLinkCopied] = useState<boolean>(false);
-    const [userData, setUserData] = useState<UserData>();
 
     useEffect(() => {
         // Check if the user already has an active session
@@ -35,10 +35,7 @@ const GenerateSessionLink  = ({setSessionStarted, userID, sessionID} : Genereate
         const sessionID = Math.floor(Math.random() * (10000000 - 10000 + 1)) + 10000;
         setSessionLink(`${baseURL}/OHSession/${userID}/${sessionID}`)
         setSessionStarted(true);
-        setUserData({
-            userID: userID,
-            sessionID: sessionID
-        })
+        setSessionID(sessionID)
 
         document.cookie = `sessionID=${sessionID}; path=/; max-age=14400`;
 
@@ -49,6 +46,12 @@ const GenerateSessionLink  = ({setSessionStarted, userID, sessionID} : Genereate
               "Content-Type": "application/json" ,
             }
           });
+          
+        if (res.ok) {
+            console.log('Session created successfully');
+        } else {
+            console.error('Failed to create session');
+        }
     }
 
     // utility function to copy data to the clipboard and manage state used to display
