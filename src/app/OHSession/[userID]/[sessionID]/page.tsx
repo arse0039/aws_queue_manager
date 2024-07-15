@@ -117,6 +117,7 @@ const OHSession = ({params}:any) => {
                     value={studentData.description}
                     onChange={handleChange}
                     className="text-black bg-gray-100 dark:bg-nav-light"
+                    maxLength={300}
                     rows={5}
                     required={true}
                 />
