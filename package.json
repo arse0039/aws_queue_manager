@@ -11,8 +11,10 @@
   "dependencies": {
     "@aws-amplify/adapter-nextjs": "^1.2.6",
     "@aws-amplify/ui-react": "^6.1.12",
+    "@azure/msal-browser": "^3.18.0",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "@microsoft/microsoft-graph-client": "^3.0.7",
     "aws-amplify": "^6.4.0",
     "next": "14.2.4",
     "react": "^18",
