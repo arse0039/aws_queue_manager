@@ -5,7 +5,7 @@ const CurrentStudent = ({queueData}:{queueData:StudentData}) => {
 
     const generateTeamsDeepLink = (email: string) => {
         const encodedEmail = encodeURIComponent(email);
-        const message = encodeURIComponent("Your turn for office hours has arrived. Please join the session.");
+        const message = encodeURIComponent("Your turn for office hours has arrived!");
         return `https://teams.microsoft.com/l/chat/0/0?users=${encodedEmail}&message=${message}`;
     };
 
