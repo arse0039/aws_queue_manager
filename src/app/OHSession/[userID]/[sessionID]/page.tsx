@@ -40,7 +40,7 @@ const OHSession = ({params}:any) => {
             throw new Error("Failed add student to the queue");
           }
 
-        const result = await res.json();
+        
         router.push(`/Success?sessionID=${params.sessionID}&email=${studentData.email}`);
       
     }
