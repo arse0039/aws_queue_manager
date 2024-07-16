@@ -48,32 +48,39 @@ const TALandingPage = ({userID} : {userID: string}) => {
     );
 
     useEffect(() => {
+        let ws: WebSocket | null = null;
+        let reconnectAttempts = 0;
+        const maxReconnectAttempts = 5;
     
-        let ws: WebSocket | null = null
         const connectWebSocket = () => {
             if (sessionID) {
-                const wsUrl = `${process.env.NEXT_PUBLIC_WEBSOCKET_URL}?sessionID=${sessionID}`;
+                const wsUrl = `${process.env.NEXT_PUBLIC_WEBSOCKET_URL}?sessionID=${sessionID}&userType=TA`;
                 ws = new WebSocket(wsUrl);
     
                 ws.onopen = () => {
                     console.log("WebSocket connection opened");
+                    reconnectAttempts = 0;
                 };
                 
-                //when a user is added to the queue, the webSocket will send a message to the client,
-                // with the type "QUEUE_UPDATE", triggering a refresh of the data. 
                 ws.onmessage = (event) => {
                     const data = JSON.parse(event.data);
-                    console.log("Message received", data);
                     if (data.type === 'QUEUE_UPDATE') {
                         setRefreshQueue((prev) => !prev);
                         console.log("Queue refreshed!");
                     } 
                 };
     
-                // When a disconnect occurs, we want to refresh the connection, which lives for 4 hours.
                 ws.onclose = (event) => {
                     console.log('Socket disconnected', event);
-                    setSocketDisconnect((prev) => !prev);
+                    if (reconnectAttempts < maxReconnectAttempts) {
+                        const timeout = Math.pow(2, reconnectAttempts) * 1000;
+                        setTimeout(() => {
+                            reconnectAttempts++;
+                            connectWebSocket();
+                        }, timeout);
+                    } else {
+                        setSocketDisconnect(true);
+                    }
                 };
     
                 ws.onerror = (error) => {

@@ -40,8 +40,8 @@ const OHSession = ({params}:any) => {
             throw new Error("Failed add student to the queue");
           }
 
-        const result = await res.json();
-        router.push(`/Success?queuePosition=${result.queuePosition}`);
+        
+        router.push(`/Success?sessionID=${params.sessionID}&email=${studentData.email}`);
       
     }
 
@@ -66,8 +66,8 @@ const OHSession = ({params}:any) => {
     return (
         <div className="flex flex-col justify-center items-center p-4 text-default-text-black dark:text-default-text-white">
             <div className="flex flex-col justify-center items-center pb-5"> 
-            <h1>Welcome to {name}&apos;s Office Hours</h1>
-            <p className="flex text-center p-5 max-w-[55%]">Please fill out the form using your official Oregon State email address and provide a brief description of what you need assistance with and {name} will be with your as soon as possible.
+            <h1>Welcome to your Office Hours!</h1>
+            <p className="flex text-center p-5 max-w-[55%]">Please fill out the form using your official Oregon State email address and provide a brief description of what you need assistance with and the TA or instructor will be with your as soon as possible.
             </p>
             </div>
             <form
