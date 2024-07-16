@@ -26,8 +26,8 @@ This web application is designed to help Teaching Assistants (TAs) manage office
 ## Installation
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/office-hours-queue.git
-    cd office-hours-queue
+    git clone https://github.com/yourusername/aws_queue_manager.git
+    cd aws_queue_manager
     ```
 
 2. Install dependencies:
