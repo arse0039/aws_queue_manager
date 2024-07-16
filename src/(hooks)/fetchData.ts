@@ -6,11 +6,16 @@ interface Options {
 }
 
 export const useDataFetching = <T> (
-    url:string, options:Options, dependencyArray:any[], setterFn?:React.Dispatch<React.SetStateAction<any>>
+    url:string, 
+    options:Options, 
+    dependencyArray:any[], 
+    setterFn?:React.Dispatch<React.SetStateAction<any>>, 
+    loadingFn?:React.Dispatch<React.SetStateAction<boolean>>
 ) => {
     const [data, setData] = useState<T | null>(null);
 
     useEffect(() => {
+        loadingFn ? loadingFn(true) : null;
         const fetchData = async () => {
             if (url) {
             try {
@@ -20,9 +25,12 @@ export const useDataFetching = <T> (
                 setterFn ? setterFn(getDataJson): null;
             } catch (error) {
                 console.error("Error fetching data", error);
+            } finally {
+                loadingFn ? loadingFn(false) : null;
             }
         } else {
             console.log("No URL")
+            loadingFn ? loadingFn(false) : null;
         }
         };
         fetchData();

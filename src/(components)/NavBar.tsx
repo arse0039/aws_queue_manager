@@ -35,13 +35,16 @@ const NavBar = ( {userLoggedIn}:{userLoggedIn:boolean}) => {
     } 
       router.push("/Login/")
   }
-  const hideNavLinksPaths = ["/page/", "/Success", "/OHSession"];
-  const hideNavLinks = hideNavLinksPaths.some(path => pathname.startsWith(path));
+
+  const hideSignInLinkPaths = ["/page/", "/Success", "/OHSession"];
+  const hideAuthLinks = hideSignInLinkPaths.some(path => pathname.startsWith(path));
+  
+  const showHomeLink = pathname === "/Login";
 
   return (
     <nav className="flex justify-between bg-nav-light dark:bg-nav-dark p-4">
         <div className="flex items-center space-x-4 text-default-text-black dark:text-default-text-white">
-        {!hideNavLinks &&
+        {showHomeLink &&
           <Link href="/" className="text-default-text-black dark:text-default-text-white" >
               Home
           </Link>
@@ -49,7 +52,7 @@ const NavBar = ( {userLoggedIn}:{userLoggedIn:boolean}) => {
         </div>
         <div className="flex justify-evenly">
           <DarkModeToggle/>
-          {!hideNavLinks &&
+          {!hideAuthLinks &&
             (!authCheck ? (
               <Link href="/Login/" className="btn" >
                 TA Login
