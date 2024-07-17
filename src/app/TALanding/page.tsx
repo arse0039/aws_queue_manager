@@ -31,7 +31,7 @@ const TALandingPage = ({ userID, idToken }: TALandingPageProps) => {
           method: "GET",
           headers: { 
             "Content-Type": "application/json",
-            "Authorization": idToken ? `Bearer ${idToken}` : '',
+            "Authorization": idToken ? idToken : '',
           },   
         },
         [],
@@ -54,7 +54,7 @@ const TALandingPage = ({ userID, idToken }: TALandingPageProps) => {
             method: "GET",
             headers: { 
                 "Content-Type": "application/json",
-                "Authorization": idToken ? `Bearer ${idToken}` : '',
+                "Authorization": idToken ? idToken : '',
              },
         },
         [sessionID, refreshQueue],
