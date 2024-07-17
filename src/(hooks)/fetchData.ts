@@ -2,7 +2,10 @@ import {useEffect, useState} from 'react';
 
 interface Options {
     method: string;
-    headers: { "Content-Type": "application/json" };
+    headers: { 
+        "Content-Type": "application/json",
+        "Authorization"?: string
+    };
 }
 
 export const useDataFetching = <T> (

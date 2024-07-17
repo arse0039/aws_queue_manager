@@ -9,7 +9,12 @@ import QueueListDiv from '@/(components)/QueueListDiv';
 import CurrentStudent from '@/(components)/CurrentStudent';
 import DeleteButton from '@/(components)/DeleteButton';
 
-const TALandingPage = ({ userID }: { userID: string }) => {    
+interface TALandingPageProps {
+    userID: string,
+    idToken: string | undefined;
+}
+
+const TALandingPage = ({ userID, idToken }: TALandingPageProps) => {    
     const [sessionStarted, setSessionStarted] = useState<boolean>(false);
     const [sessionID, setSessionID] = useState<number | undefined>(undefined);
     const [refreshQueue, setRefreshQueue] = useState<boolean>(false);
@@ -24,7 +29,10 @@ const TALandingPage = ({ userID }: { userID: string }) => {
         `${process.env.NEXT_PUBLIC_API_ENDPOINT}/users?userID=${userID}`,
         {
           method: "GET",
-          headers: { "Content-Type": "application/json" },
+          headers: { 
+            "Content-Type": "application/json",
+            "Authorization": idToken ? `Bearer ${idToken}` : '',
+          },   
         },
         [],
         (data) => {
@@ -44,7 +52,10 @@ const TALandingPage = ({ userID }: { userID: string }) => {
         sessionID ? `${process.env.NEXT_PUBLIC_API_ENDPOINT}/queueManager?sessionID=${sessionID}` : '',
         {
             method: "GET",
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": idToken ? `Bearer ${idToken}` : '',
+             },
         },
         [sessionID, refreshQueue],
         setQueueData
