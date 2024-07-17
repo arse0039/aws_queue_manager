@@ -2,6 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useDataFetching } from '@/(hooks)/fetchData';
 import { StudentData, UserData } from '@/lib/definitions';
+import { fetchAuthSession } from 'aws-amplify/auth';
 import GenerateSessionLink from '@/(components)/GenerateSessionLink';
 import QueueCount from '@/(components)/QueueCount';
 import StudentQueueCard from '@/(components)/StudentQueueCard';
@@ -11,18 +12,30 @@ import DeleteButton from '@/(components)/DeleteButton';
 
 interface TALandingPageProps {
     userID: string,
-    idToken: string | undefined;
 }
 
-const TALandingPage = ({ userID, idToken }: TALandingPageProps) => {    
+const TALandingPage = ({ userID }: TALandingPageProps) => {    
     const [sessionStarted, setSessionStarted] = useState<boolean>(false);
     const [sessionID, setSessionID] = useState<number | undefined>(undefined);
     const [refreshQueue, setRefreshQueue] = useState<boolean>(false);
     const [sessionData, setSessionData] = useState<UserData[]>([]);
     const [queueData, setQueueData] = useState<StudentData[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [idToken, setIdToken] = useState<string | undefined>("");
     const containerRef = useRef<HTMLDivElement>(null);
     const webSocket = useRef<WebSocket | null>(null);
+
+    useEffect(() => {
+        const getAuthToken = async () => {
+            try {
+                const { tokens } = await fetchAuthSession();
+                setIdToken(tokens?.idToken?.toString());
+            } catch (error) {
+                console.error('Error fetching auth token:', error);
+            }
+        };
+        getAuthToken();
+    }, []);
 
     // Fetch user data
     useDataFetching<UserData[]>(
@@ -31,7 +44,7 @@ const TALandingPage = ({ userID, idToken }: TALandingPageProps) => {
           method: "GET",
           headers: { 
             "Content-Type": "application/json",
-            "Authorization": idToken ? idToken : '',
+            "Authorization": idToken,
           },   
         },
         [],
