@@ -1,17 +1,18 @@
 "use client"
 import React from 'react';
 import { motion } from "framer-motion";
+import VideoPlayer from './VideoPlayer';
 
 const GenericLanding: React.FC = () => {
     return (
         <div className="min-h-screen mx-2">
             <motion.div
-                className="h-[60vh] flex flex-col justify-center items-start p-3"
+                className="h-[50vh] flex flex-col justify-center items-start p-3"
                 initial={{ opacity: 0,}}
                 whileInView={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: false, amount: 0.7 }}
+                transition={{ duration: 0.4 }}
+                viewport={{ once: false, amount: 1 }}
             >
                 <div className="flex flex-col justify-center items-start ml-8">
                     <h1 className="text-3xl font-bold mb-4">Welcome to the Office Hour Queue Manager!</h1>
@@ -29,12 +30,12 @@ const GenericLanding: React.FC = () => {
                 initial={{ opacity: 0}}
                 whileInView={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: false, amount: 0.7 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: false, amount: 0.9 }}
             >
-                <div className="flex w-[70vw] flex-row justify-between items-center">
+                <div className="flex w-[90vw] flex-row justify-between items-center">
                     <div className="flex-1 mx-2">
-                        <p> IMAGE PLACEHOLDER</p>
+                        <VideoPlayer src="/videos/StudentView.mp4"/>
                     </div>
                     <div className="flex-1">
                         <p className="max-w-2xl">
@@ -46,14 +47,14 @@ const GenericLanding: React.FC = () => {
 
             </motion.div>
             <motion.div
-                className="h-[60vh] flex items-start m-2 p-4"
+                className="h-[55vh] flex items-start m-2 p-4"
                 initial={{ opacity: 0}}
                 whileInView={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: false, amount: 0.7 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: false, amount: 0.9 }}
             >
-                <div className="flex w-[70vw]">
+                <div className="flex w-[90vw] flex-row justify-between items-center">
                     <div className="flex-1 mx-2">
                         <p className="max-w-2xl">
                             User&apos;s can easily view their office hour queue with near real-time updates with visual timers for student wait times.
@@ -61,7 +62,7 @@ const GenericLanding: React.FC = () => {
                         </p>
                     </div>
                     <div className="flex-2 mx-2">
-                        <p> IMAGE PLACEHOLDER</p>
+                    <VideoPlayer src="/videos/QueuePage.mp4"/>
                     </div>
                 </div>
 
